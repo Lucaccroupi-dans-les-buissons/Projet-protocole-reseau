@@ -18,7 +18,7 @@ Timeout = 300
 ackMsgId = 255
 
 #### Start radio module ####
-radio.config(channel=7, address=50)
+radio.config(channel=33, address=50)
 radio.on()
 
 
@@ -46,7 +46,8 @@ class Message:
             Returns:
                     msgStr(str): string contenant les détails du message
     '''
-      return str(self.exped)+ " -> "+ str(self.dest)+ "n[" + str(self.seqNum)+ "] "+ " : type "+ str(self.msgId)+" : " +str(self.payload)+ " (crc="+ str(self.crc)+")"
+      
+        return str(self.exped)+ " -> "+ str(self.dest)+ "n[" + str(self.seqNum)+ "] "+ " : type "+ str(self.msgId)+" : " +str(self.payload)+ " (crc="+ str(self.crc)+")"
 
 #### Toolbox ####
 def bytes_to_int(bytesPayload:bytes):
@@ -130,6 +131,7 @@ def receive_ack(msg: Msg):
 
 def send_msg(msgId:int, payload:List[int], userId:int, dest:int):
     '''
+    
     Envoie un message.
     1) Crée un objet Message à partir des paramètres
     En boucle jusqu'à un timeout ou ack: 
@@ -144,9 +146,10 @@ def send_msg(msgId:int, payload:List[int], userId:int, dest:int):
             Returns:
                     acked(bool): True si message acké, sinon False
     '''
+    
     global seqNum
-    pass # à compléter
-
+    message = int_to_bytes([1,2,3])
+    radio.send_bytes(message)
 def receive_msg(userId:int):
     '''
     Attend un message.
@@ -158,8 +161,11 @@ def receive_msg(userId:int):
             Returns:
                     msgRecu(Message): Objet Message contenant tous les paramètres du message
     '''
-    pass # à compléter
-
+    x= True
+    while x:
+        radio.receive_bytes()
+        if radio.receive_bytes() > 0:
+            x = False
 
 if __name__ == '__main__':
     
