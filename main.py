@@ -161,11 +161,8 @@ def receive_msg(userId:int):
             Returns:
                     msgRecu(Message): Objet Message contenant tous les paramètres du message
     '''
-    x= True
-    while x:
-        radio.receive_bytes()
-        if radio.receive_bytes() > 0:
-            x = False
+    sleep(1000)
+    print(bytes_to_int(radio.receive_bytes))
 
 if __name__ == '__main__':
     
