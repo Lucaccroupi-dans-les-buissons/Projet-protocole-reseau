@@ -16,7 +16,7 @@ seqNum = 0
 tryTime = 100
 Timeout = 300
 ackMsgId = 255
-
+ 
 #### Start radio module ####
 radio.config(channel=33, address=50)
 radio.on()
@@ -24,28 +24,28 @@ radio.on()
 
 #### Classe Message ####
 class Message:
-  def __init__(self, dest:int, exped:int, seqNum:int, msgId:int, payload:List[int], crc:int):
-    '''
-    Constructeur de l'objet Message à partir des paramètres
-            Parameters:
-                    dest:int, exped:int, seqNum:int, msgId:int, payload:List[int], crc:int
-            Returns:
-                    self(Message): objet Message contenant les paramètres
-    '''
-    self.exped = exped
-    self.dest = dest
-    self.seqNum = seqNum
-    self.msgId = msgId
-    self.payload = payload
-    self.crc = crc
-  def msgStr(self):
-    '''
-    Crée une string contenant les détails du message
+    def __init__(self, dest:int, exped:int, seqNum:int, msgId:int, payload:List[int], crc:int):
+        '''
+        Constructeur de l'objet Message à partir des paramètres
+                Parameters:
+                        dest:int, exped:int, seqNum:int, msgId:int, payload:List[int], crc:int
+                Returns:
+                        self(Message): objet Message contenant les paramètres
+        '''
+        self.exped = exped
+        self.dest = dest
+        self.seqNum = seqNum
+        self.msgId = msgId
+        self.payload = payload
+        self.crc = crc
+    def msgStr(self):
+        '''
+        Crée une string contenant les détails du message
             Parameters:
                     self(Message): objet message
             Returns:
                     msgStr(str): string contenant les détails du message
-    '''
+        '''
       
         return str(self.exped)+ " -> "+ str(self.dest)+ "n[" + str(self.seqNum)+ "] "+ " : type "+ str(self.msgId)+" : " +str(self.payload)+ " (crc="+ str(self.crc)+")"
 
