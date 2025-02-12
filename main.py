@@ -162,7 +162,7 @@ def receive_msg(userId:int):
     nouvelle_trame = radio.receive_bytes()
     if nouvelle_trame:
       trame = bytes_to_int(nouvelle_trame)
-      nouveau_message = Message(0, 1, None, trame[0], trame[1], None)
+      nouveau_message = Message(1, 0, None, trame[0], trame[1], None)
 
       return nouveau_message
       
@@ -182,7 +182,7 @@ if __name__ == '__main__':
                 
         # Reception des messages
         m = receive_msg(userId)        
-        if m and m.msgId==1 and destId == 0 and userId == 1:
+        if m and m.msgId==1 and destId == 1 and userId == 0:
             display.show(Image.SQUARE)
             print(m)
     
