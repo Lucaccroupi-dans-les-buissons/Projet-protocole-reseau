@@ -162,7 +162,7 @@ def receive_msg(userId:int):
     nouvelle_trame = radio.receive_bytes()
     if nouvelle_trame:
       trame = bytes_to_int(nouvelle_trame)
-      if destId == trame[2] and userId == trame[3]: 
+      if userId == trame[2]:
           nouveau_message = Message(trame[2], trame[3], None, trame[0], trame[1], None)
 
           return nouveau_message
