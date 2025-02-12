@@ -6,7 +6,7 @@ Auteur·ice : Vincent Namy
 Version : 1.0
 Date : 29.01.25
 '''
-
+#bonjour#
 #### Libraries ####
 from microbit import *
 import radio
