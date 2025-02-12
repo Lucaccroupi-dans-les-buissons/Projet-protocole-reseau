@@ -16,38 +16,37 @@ seqNum = 0
 tryTime = 100
 Timeout = 300
 ackMsgId = 255
- 
+
 #### Start radio module ####
-radio.config(channel=33, address=50)
+radio.config(channel=7, address=50)
 radio.on()
 
 
 #### Classe Message ####
 class Message:
-    def __init__(self, dest:int, exped:int, seqNum:int, msgId:int, payload:List[int], crc:int):
-        '''
-        Constructeur de l'objet Message à partir des paramètres
-                Parameters:
-                        dest:int, exped:int, seqNum:int, msgId:int, payload:List[int], crc:int
-                Returns:
-                        self(Message): objet Message contenant les paramètres
-        '''
-        self.exped = exped
-        self.dest = dest
-        self.seqNum = seqNum
-        self.msgId = msgId
-        self.payload = payload
-        self.crc = crc
-    def msgStr(self):
-        '''
-        Crée une string contenant les détails du message
+  def __init__(self, dest:int, exped:int, seqNum:int, msgId:int, payload:List[int], crc:int):
+    '''
+    Constructeur de l'objet Message à partir des paramètres
+            Parameters:
+                    dest:int, exped:int, seqNum:int, msgId:int, payload:List[int], crc:int
+            Returns:
+                    self(Message): objet Message contenant les paramètres
+    '''
+    self.exped = exped
+    self.dest = dest
+    self.seqNum = seqNum
+    self.msgId = msgId
+    self.payload = payload
+    self.crc = crc
+  def msgStr(self):
+    '''
+    Crée une string contenant les détails du message
             Parameters:
                     self(Message): objet message
             Returns:
                     msgStr(str): string contenant les détails du message
-        '''
-      
-        return str(self.exped)+ " -> "+ str(self.dest)+ "n[" + str(self.seqNum)+ "] "+ " : type "+ str(self.msgId)+" : " +str(self.payload)+ " (crc="+ str(self.crc)+")"
+    '''
+      return str(self.exped)+ " -> "+ str(self.dest)+ "n[" + str(self.seqNum)+ "] "+ " : type "+ str(self.msgId)+" : " +str(self.payload)+ " (crc="+ str(self.crc)+")"
 
 #### Toolbox ####
 def bytes_to_int(bytesPayload:bytes):
@@ -131,7 +130,6 @@ def receive_ack(msg: Msg):
 
 def send_msg(msgId:int, payload:List[int], userId:int, dest:int):
     '''
-    
     Envoie un message.
     1) Crée un objet Message à partir des paramètres
     En boucle jusqu'à un timeout ou ack: 
@@ -146,10 +144,9 @@ def send_msg(msgId:int, payload:List[int], userId:int, dest:int):
             Returns:
                     acked(bool): True si message acké, sinon False
     '''
-    
     global seqNum
-    message = int_to_bytes([1,2,3])
-    radio.send_bytes(message)
+    pass # à compléter
+
 def receive_msg(userId:int):
     '''
     Attend un message.
@@ -161,8 +158,8 @@ def receive_msg(userId:int):
             Returns:
                     msgRecu(Message): Objet Message contenant tous les paramètres du message
     '''
-    sleep(1000)
-    print(bytes_to_int(radio.receive_bytes))
+    pass # à compléter
+
 
 if __name__ == '__main__':
     
@@ -180,3 +177,4 @@ if __name__ == '__main__':
         m = receive_msg(userId)        
         if m and m.msgId==1:
             display.show(Image.SQUARE)
+    
