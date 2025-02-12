@@ -18,7 +18,7 @@ Timeout = 300
 ackMsgId = 255
 
 #### Start radio module ####
-radio.config(channel=7, address=50)
+radio.config(channel=8, address=50)
 radio.on()
 
 
