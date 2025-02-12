@@ -145,7 +145,7 @@ def send_msg(msgId:int, payload:List[int], userId:int, dest:int):
                     acked(bool): True si message acké, sinon False
     '''
     global seqNum
-    msg = [msgID] + payload
+    msg = [msgId] + payload
     radio.send_bytes(int_to_bytes(msg))
 
 def receive_msg(userId:int):
