@@ -46,7 +46,7 @@ class Message:
             Returns:
                     msgStr(str): string contenant les détails du message
     '''
-      return str(self.exped)+ " -> "+ str(self.dest)+ "n[" + str(self.seqNum)+ "] "+ " : type "+ str(self.msgId)+" : " +str(self.payload)+ " (crc="+ str(self.crc)+")"
+    return str(self.exped)+ " -> "+ str(self.dest)+ "n[" + str(self.seqNum)+ "] "+ " : type "+ str(self.msgId)+" : " +str(self.payload)+ " (crc="+ str(self.crc)+")"
 
 #### Toolbox ####
 def bytes_to_int(bytesPayload:bytes):
