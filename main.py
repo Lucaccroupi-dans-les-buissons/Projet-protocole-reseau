@@ -145,7 +145,8 @@ def send_msg(msgId:int, payload:List[int], userId:int, dest:int):
                     acked(bool): True si message acké, sinon False
     '''
     global seqNum
-    pass # à compléter
+    msg = [msgID] + payload
+    radio.send_bytes(int_to_bytes(msg))
 
 def receive_msg(userId:int):
     '''
@@ -158,7 +159,13 @@ def receive_msg(userId:int):
             Returns:
                     msgRecu(Message): Objet Message contenant tous les paramètres du message
     '''
-    pass # à compléter
+    nouvelle_trame = radio.receive_bytes()
+    if nouvelle_trame:
+      trame = bytes_to_int(nouvelle_trame)
+      nouveau_message = Message(None, None, None, trame[0], trame[1], None)
+
+      return nouveau_message
+      
 
 
 if __name__ == '__main__':
