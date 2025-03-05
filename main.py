@@ -147,10 +147,10 @@ def send_msg(msgId:int, payload:List[int], userId:int, dest:int):
     global seqNum
     msg = [msgId] + payload + [userId] + [dest] + [seqNum]
     radio.send_bytes(int_to_bytes(msg))
-    if seqNum < 255:
-                seqNum += 1
-            else:
-                seqNum = 0
+    if seqNum < 254:
+        seqNum += 1
+    else:
+        seqNum = 0
 
 def receive_msg(userId:int):
     '''
