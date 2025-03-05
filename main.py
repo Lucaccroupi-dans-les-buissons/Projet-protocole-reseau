@@ -145,8 +145,12 @@ def send_msg(msgId:int, payload:List[int], userId:int, dest:int):
                     acked(bool): True si message acké, sinon False
     '''
     global seqNum
-    msg = [msgId] + payload + [userId] + [dest]
+    msg = [msgId] + payload + [userId] + [dest] + [seqNum]
     radio.send_bytes(int_to_bytes(msg))
+    if seqNum < 255:
+                seqNum += 1
+            else:
+                seqNum = 0
 
 def receive_msg(userId:int):
     '''
@@ -163,11 +167,11 @@ def receive_msg(userId:int):
     if nouvelle_trame:
       trame = bytes_to_int(nouvelle_trame)
       if userId == trame[2]:
-          nouveau_message = Message(trame[2], trame[3], None, trame[0], trame[1], None)
+          nouveau_message = Message(trame[2], trame[3], trame[4], trame[0], trame[1], None)
 
           return nouveau_message
       
-#test
+
 
 if __name__ == '__main__':
     
@@ -176,8 +180,9 @@ if __name__ == '__main__':
     while True:
         # Messages à envoyer
         destId = 1
+        
         if button_a.was_pressed():
-            send_msg(1,[60],userId, destId)
+            send_msg(1,[60], userId, destId)
             
 
                 
