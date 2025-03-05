@@ -111,10 +111,11 @@ def ack_msg(msg : Message):
             Parameters:
                     msg(Message): Objet Message contenant tous les paramètres du message à acker
     '''
-    ack = Message(msg[1], msg[0], msg[2], ackMsgId)
+#ack = Message(msg.dest, msg.exped, msg.seqNum, ackMsgId, None, None)
+    ack = [msg.dest, msg.exped, msg.seqNum, ackMsgId]
     radio.send_bytes(int_to_bytes(ack))
     print("ack envoyé")
-    print(ack.msgStr())       
+    print(ack)       
 
 def receive_ack(msg: Msg):
     '''
@@ -168,7 +169,7 @@ def receive_msg(userId:int):
     nouvelle_trame = radio.receive_bytes()
     if nouvelle_trame:
       trame = bytes_to_int(nouvelle_trame)
-      if userId == trame[2]:
+      if userId == trame[2] and len(trame) > 3:
           nouveau_message = Message(trame[2], trame[3], trame[4], trame[0], trame[1], None)
           ack_msg(nouveau_message)
           return nouveau_message
@@ -191,7 +192,6 @@ if __name__ == '__main__':
         # Reception des messages
         m = receive_msg(userId)        
         if m and m.msgId==1:
-            ack_msg()
             display.show(Image.SQUARE)
             sleep(100)
             display.clear()
